@@ -69,24 +69,22 @@ public class Homework {
 		// 2 X 1 = 2
 		// 2 X 2 = 4
 		// 2 X 3 = 6
+		//1) Scanner 활용해서 m, n
+		//2) m, n을 입력 받으면 반복문을 통해서 구구단 완성
+		//3) m, n 어떠한 역할을 하는지 파악한 후 반복문 최종 완성
+		//단 입력받는 m		
 		System.out.println("m값을 입력해주세요.>");
 		int m = Integer.parseInt(scanner.nextLine());
+		//몇 번째까지 구구단을 완성할 n을 입력
 		System.out.println("n값을 입력해주세요.>");
 		int n = Integer.parseInt(scanner.nextLine());
 		
-		for(int i=m; i<=n; i++) {
-			for(int j=1;j>i ;j++) {
-				System.out.println(m+" x "+n+" = " + (m*n));
-			}
-			
+		//m은 하나의 변수로 쓰이면 되고 n은 익히 쓰이는 i의 값
+		
+		for(int i = 1; i<=n; i++) {//i가 입력된 값보다 작을 때까지 반복
+			System.out.println(m + " x " + i + " = " +(m*i));
 		}
-		//for(int i=m;i>=n;i++) {
-			//for(int j=1;j>=i;j++) {
 				
-			//	System.out.println(m+" X "+n+" = "+(m*n));
-		//	}
-			
-		//}
 
 		//문제5) 호수에서 살고 있는 얼음요정이 곱셈을 공부하기로 했다. 근데 이 요정은 너무 멍청해서 9라는 숫자 이외에는 헷갈려서 잘 쓰지 못한다고 한다. 그래서 사람과는 곱셈방식이 좀 다르다.
 		//(규칙 1)
@@ -119,30 +117,33 @@ public class Homework {
 		//1*8=9	 2*8=9	 3*8=9 	4*8=9 	5*8=9 	6*8=9 	7*8=9 	8*8=9 	9*8=72 
 		//1*9=9	 2*9=18	 3*9=27 4*9=36 	5*9=45 	6*9=54 	7*9=63 	8*9=72 	9*9=81
 		
-		System.out.println("n 값을 입력하세요.>");
-		int nn = Integer.parseInt(scanner.nextLine());
-		for(int i=1; i<nn; i++) {
-			for (int j=1; j<nn; j++){
-				int math = i * j; //i*j 변수 선언
-				boolean boo=true;//while문 탈출용 변수
-				while(boo) {
-					if(math % 10 ==9) {
-						math %= 10;
-						boo = false;
-					}else if (math >= 10) {
-						math /= 10;
-					}else if (math < 10) {
-						boo = false;
+		//1) 나눗셈, 나머지 계산
+		//각 자리수에 9가 포함되어 있는지 확인.
+		//자리수가 한자리 -> i == 9 비교
+		//두자리수...
+		//33 -> 1. 33/10 = 9 포함, 33%10 = 9 포함
+		//i*j = 99 셋 다 비교
+		//포함이 되어 있지 않다, 결과 9로 나와야한다.
+		//자리수 표현 -> String.length
+		
+		System.out.println("값을 입력하세요.>");
+		int number = Integer.parseInt(scanner.nextLine());
+		
+		for(int i = 2; i<=number; i++) {
+			for(int j=1; j<=number; j++) {
+				if(i>10) {
+					int ten = i/10;
+					int one = i-(ten*10);
+					if(ten == 9 || one == 9) {
+						System.out.println(i + " * "+j+" = "+(i*j));
+						break;
 					}
-				}
-				if (i%10==9 || j%10==9 || math ==9) {
-					System.out.printf("%d * %d = %d\t", j, i, i*j);
-				}else {
-					System.out.printf("%d * %d = 9\t", j, i);
+				} else if(j>10) {
+					//
 				}
 			}
-			System.out.println();
 		}
+		
 		
 
 	}
