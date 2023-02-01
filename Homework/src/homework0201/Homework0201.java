@@ -1,5 +1,7 @@
 package homework0201;
 
+import java.util.Scanner;
+
 public class Homework0201 {
 	public static void main(String[] args) {
 		// 문제1) 다음은 키보드로부터 상품 수와 상품 가격을 입력받아서
@@ -12,6 +14,7 @@ public class Homework0201 {
 		// 4) 분석기능은 최고 가격을 가지는 제품과 해당 제품을 제외한 제품들의 총합을 구합니다.
 		// 5) 종료 시에는 프로그램을 종료한다고 메세지를 출력하도록 구현하세요.
 		
+		Scanner sc = new Scanner(System.in);
 
 	}
 }
