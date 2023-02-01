@@ -95,7 +95,15 @@ public class homework {
 				int[] counter = new int[4];
 		
 				for (int i = 0; i < answer.length; i++) {
-					counter[(answer[i]-1)]++;
+					//answer의 숫자의 갯수 -> counter 인덱스 매칭
+					//answer에서 데이터(값)이 나왔을 때 
+					//-> counter의 인덱스로 바꾼다.
+					//answer -> 1
+					//counter[0] = counter[0]+1;
+					//answer -> 4
+					//counter[3] = counter[3]+1;
+					counter[answer[i]-1]++;
+					//counter[answer[i]-1] += 1;
 				}
 				for (int i = 0; i < counter.length; i++) {
 					for(int j=0; j<counter[i]; j++) {
