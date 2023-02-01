@@ -105,7 +105,9 @@ public class homework {
 					counter[answer[i]-1]++;
 					//counter[answer[i]-1] += 1;
 				}
+				//counter 배열의 크기만큼
 				for (int i = 0; i < counter.length; i++) {
+					//counter[0] = answer에서 숫자 1의 갯수 = 3
 					for(int j=0; j<counter[i]; j++) {
 						System.out.print("*");
 					}
