@@ -6,14 +6,14 @@ public class Application02 {
 	public static void main(String[] args) {
 		Access ac = new Access();
 		
-		ac.free = "public";
-		ac.parent = "parent";
-		ac.privacy = "privacy";
-		ac.basic = "basic";
-		
-		ac.instead();
-		ac.info();
-		ac.parnt();
-		ac.basic();
+//		ac.free = "public";
+//		ac.parent = "parent";
+//		ac.privacy = "privacy";
+//		ac.basic = "basic";
+//		
+//		ac.instead();
+//		ac.info();
+//		ac.parnt();
+//		ac.basic();
 	}
 }
