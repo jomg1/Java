@@ -15,25 +15,23 @@ public class Homework0201 {
 		// 5) 종료 시에는 프로그램을 종료한다고 메세지를 출력하도록 구현하세요.
 		
 		Scanner sc = new Scanner(System.in);
-		
-		//상품 수 입력받는 변수
-		int prdCount = 0;
-		
+						
 		//상품의 정보를 보관하는 배열 생성
-		Product[] prdAry = null;
+		Product[] prdAry = null; //
+		int productNo = 0;
 		
 		while(true) {
 			System.out.println("1.상품 수 | 2.상품 및 가격 입력 | 3.제품별 가격 | 4.분석 | 5.종료");
-			System.out.println("입력>");
+			System.out.println("선택>");
 			
 			int selectNo = Integer.parseInt(sc.nextLine());
 			
 			if(selectNo == 1) {
 				System.out.println("상품 수 입력>");
-				prdCount = Integer.parseInt(sc.nextLine());
+				productNo = Integer.parseInt(sc.nextLine());
 			}else if(selectNo == 2) {
 				//배열의 크기
-				prdAry = new Product[prdCount];
+				prdAry = new Product[productNo];
 				
 				for(int i=0;i<prdAry.length;i++) {
 					//각 배열에 있는 객체 초기화
