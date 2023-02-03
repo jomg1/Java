@@ -16,6 +16,5 @@ public class Exam01 {
 		System.out.println("나눗셈 결과 : "+na);
 		
 		
-		
 	}
 }
