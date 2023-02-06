@@ -2,7 +2,7 @@ package com.yedam.access;
 
 public class Application04 {
 	public static void main(String[] args) {
-		//Singleton.getInstance() = Singleton 클래스에서 만든 객체(리턴값이 객체 sington임)
+		//Singleton.getInstance() = Singleton 클래스에서 만든 객체
 		Singleton obj1 = Singleton.getInstance();
 		Singleton obj2 = Singleton.getInstance();
 		Singleton obj3 = Singleton.getInstance();
@@ -13,7 +13,12 @@ public class Application04 {
 		
 		obj1.getInfo();
 		
-		//원래 객체 생성하는 방법
-		//Singleton a = new Singleton();
+//		Singleton a = new Singleton();
+		
+		
+		
+		
+		
+
 	}
 }
