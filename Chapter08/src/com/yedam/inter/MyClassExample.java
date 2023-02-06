@@ -24,6 +24,7 @@ public class MyClassExample {
 		
 		MyClass myClass4 = new MyClass();
 		myClass4.methodB(new Televison());
+		myClass4.methodB(new Audio());
 		
 	}
 }
