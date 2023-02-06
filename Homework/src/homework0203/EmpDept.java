@@ -6,7 +6,7 @@ public class EmpDept {
 	public int pay;
 	
 	//생성자
-	public EmpDept(String name, int pay) {
+	public EmpDept(String name, int pay, String string) {
 		this.name = name;
 		this.pay = pay;
 	}
