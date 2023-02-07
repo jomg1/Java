@@ -5,10 +5,12 @@ public class CultureExample {
 		Movie movie = new Movie("추격자",7,5,"액션");
 		
 		movie.setTotalScore(4);
-		movie.setTotalScore(4);
-		movie.setTotalScore(4);
-		movie.getGrade();
+		movie.setTotalScore(1);
+		movie.setTotalScore(2);
+		movie.setTotalScore(5);
+		
 		movie.getInformation();
+		System.out.println("=====================");
 		
 		Performance perfo = new Performance("지킬앤하이드",9,10,"스릴러");
 		

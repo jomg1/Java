@@ -1,6 +1,6 @@
 package homework0206;
 
-public interface Notebook {
+public interface Notebook extends Tablet{
 	public static final int NOTEBOOK_MODE = 1;
 	
 	//메소드

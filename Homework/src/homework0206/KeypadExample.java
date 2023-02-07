@@ -2,8 +2,8 @@ package homework0206;
 
 public class KeypadExample {
 	public static void main(String[] args) {
-		RPGgame rpg = new RPGgame(0);
-		rpg.start();
+		RPGgame rpg = new RPGgame();
+		
 		rpg.leftUpButton();
 		rpg.rightUpButton();
 		rpg.changeMode();
@@ -15,8 +15,8 @@ public class KeypadExample {
 		
 		System.out.println("======================");
 		
-		ArcadeGame arcade = new ArcadeGame(0);
-		arcade.start();
+		ArcadeGame arcade = new ArcadeGame();
+		
 		arcade.leftUpButton();
 		arcade.rightUpButton();
 		arcade.leftDownButton();
