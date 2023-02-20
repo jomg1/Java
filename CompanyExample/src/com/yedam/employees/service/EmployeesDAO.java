@@ -22,7 +22,7 @@ public class EmployeesDAO extends DAO{
 		return employeeDao;
 	}
 
-	
+	//모든 사원 조회
 	public List<Employees> getEmployeesList(){
 		List<Employees> list = new ArrayList<>();
 		Employees emp = null;
@@ -82,6 +82,65 @@ public class EmployeesDAO extends DAO{
 		}
 	
 	//사원 삭제, 수정, 등록
+	//삭제
+	public int deleteEmp(Employees emp) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "DELETE FROM dept WHERE employee_id =?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  emp.getEmployeeId());
+			
+			result = pstmt.executeUpdate();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//수정
+	public int modifyEmp(Employees emp) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "update set salary = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1,  emp.getSalary());
+			
+			result = pstmt.executeUpdate();//실행 결과를 확실히 알기 위해서 result에 결과값을 넣어준다.
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//등록
+	public int insertEmp(Employees emp) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "insert into dept values(?,?,?,?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, emp.getEmployeeId());
+			pstmt.setString(2, emp.getEmpName());
+			pstmt.setString(3, emp.getHiredate());
+			pstmt.setInt(4, emp.getSalary());
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	
+	
 
 }
 

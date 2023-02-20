@@ -3,6 +3,7 @@ package com.yedam.exe;
 import java.util.Scanner;
 
 import com.yedam.departments.service.DepartmentsService;
+import com.yedam.employees.service.EmployeesService;
 
 public class LoadingForm {
 	
@@ -11,6 +12,7 @@ public class LoadingForm {
 	//run 메소드 안에 메뉴 선택 용도
 	int selectNo = 0;
 	DepartmentsService ds = new DepartmentsService();
+	EmployeesService es = new EmployeesService();
 	
 	public LoadingForm() {
 		run();
@@ -94,14 +96,19 @@ public class LoadingForm {
 			
 			switch(employeeMenu) {
 			case 1:
+				es.getEmployeesList();
 				break;
 			case 2:
+				es.getEmployees();
 				break;
 			case 3:
+				es.deleteEmp();
 				break;
 			case 4:
+				es.modifyEmp();
 				break;
 			case 5:
+				es.insertEmp();
 				break;
 			case 6:
 				System.out.println("사원 업무 종료");

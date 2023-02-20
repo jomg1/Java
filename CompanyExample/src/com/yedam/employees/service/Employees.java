@@ -6,6 +6,7 @@ public class Employees {
 	private String empName;
 	private String hiredate;
 	private int salary;
+
 	public int getEmployeeId() {
 		return employeeId;
 	}
