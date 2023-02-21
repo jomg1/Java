@@ -1,5 +1,6 @@
 package com.yedam.employees.service;
 
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -9,17 +10,29 @@ public class EmployeesService {
 	Scanner sc = new Scanner(System.in);
 	
 	//모든 사원 조회
+//	public void getEmployeesList() {
+//		//DAO에 있는 정보를 새로운 리스트 안에 받아옴
+//		List<Employees>list = EmployeesDAO.getInstance().getEmployeesList();
+//		System.out.println("==================================================");
+//		for(int i=0; i<list.size(); i++) {
+//			System.out.println("사원 번호 : " + list.get(i).getEmployeeId());
+//			System.out.println("사원 이름 : " + list.get(i).getEmpName());
+//			System.out.println("입 사 일 : " + list.get(i).getHiredate());
+//			System.out.println("급   여 : " + list.get(i).getSalary());
+//			System.out.println("=============================================");
+//		}
+//	}
+//	
 	public void getEmployeesList() {
+		//DAO에 있는 정보를 새로운 리스트 안에 받아옴
 		List<Employees>list = EmployeesDAO.getInstance().getEmployeesList();
 		System.out.println("==================================================");
 		for(int i=0; i<list.size(); i++) {
-			System.out.println("사원 번호 : " + list.get(i).getEmployeeId());
-			System.out.println("사원 이름 : " + list.get(i).getEmpName());
-			System.out.println("입 사 일 : " + list.get(i).getHiredate());
-			System.out.println("급   여 : " + list.get(i).getSalary());
-			System.out.println("=============================================");
+			System.out.println(list.get(i).toString());
 		}
 	}
+	
+	
 	
 	//사원 조회
 	public void getEmployees() {
@@ -37,8 +50,8 @@ public class EmployeesService {
 		}
 	}
 	
-	//등록
-	public void insertEmp() {
+//	등록
+	public int insertEmp() {
 		System.out.println("==================사원 추가==================");
 		System.out.println("사원 번호>");
 		int empNo = Integer.parseInt(sc.nextLine());
@@ -64,6 +77,7 @@ public class EmployeesService {
 			System.out.println("사원 등록 실패");
 		}
 	}
+	
 	
 	//수정
 	public void modifyEmp() {

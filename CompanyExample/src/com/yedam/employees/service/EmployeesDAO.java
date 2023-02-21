@@ -2,6 +2,7 @@ package com.yedam.employees.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 import com.yedam.common.DAO;
 import com.yedam.departments.service.Departments;
@@ -21,6 +22,8 @@ public class EmployeesDAO extends DAO{
 		}
 		return employeeDao;
 	}
+	
+
 
 	//모든 사원 조회
 	public List<Employees> getEmployeesList(){
@@ -35,9 +38,9 @@ public class EmployeesDAO extends DAO{
 			
 			while(rs.next()) {
 				emp = new Employees();
-				emp.setEmployeeId(rs.getInt("imployee_id"));
-				emp.setEmpName(rs.getString("first_name"));
-				emp.setHiredate(rs.getString("hire_date"));
+				emp.setEmployeeId(rs.getInt("employee_id"));
+				emp.setEmpName(rs.getString("last_name"));
+				emp.setHiredate(rs.getDate("hire_date"));
 				emp.setSalary(rs.getInt("salary"));
 				
 				list.add(emp);
@@ -67,8 +70,8 @@ public class EmployeesDAO extends DAO{
 			if(rs.next()) {
 				emp = new Employees();
 				emp.setEmployeeId(rs.getInt("employee_id"));
-				emp.setEmpName(rs.getString("first_name"));
-				emp.setHiredate(rs.getString("hire_date"));
+				emp.setEmpName(rs.getString("last_name"));
+				emp.setHiredate(rs.getDate("hire_date"));
 				emp.setSalary(rs.getInt("salary"));
 			}
 			
@@ -119,26 +122,49 @@ public class EmployeesDAO extends DAO{
 		return result;
 	}
 	
+//	//등록
+//	public int insertEmp(Employees emp) {
+//		int result = 0;
+//		try {
+//			conn();
+//			String sql = "insert into dept values(?,?,?,?)";
+//			pstmt = conn.prepareStatement(sql);
+//			pstmt.setInt(1, emp.getEmployeeId());
+//			pstmt.setString(2, emp.getEmpName());
+//			pstmt.setDate(3, emp.getHiredate());
+//			pstmt.setInt(4, emp.getSalary());
+//			
+//		}catch(Exception e) {
+//			e.printStackTrace();
+//		}finally {
+//			disconn();
+//		}
+//		return result;
+//	}
+	
 	//등록
 	public int insertEmp(Employees emp) {
 		int result = 0;
 		try {
 			conn();
-			String sql = "insert into dept values(?,?,?,?)";
+			String sql = "insert into emp (employee_id, last_name, email, hire_date, job_id)"
+					+ " values (?,?,sysdate,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, emp.getEmployeeId());
 			pstmt.setString(2, emp.getEmpName());
-			pstmt.setString(3, emp.getHiredate());
+			pstmt.setDate(3, emp.getHiredate());
 			pstmt.setInt(4, emp.getSalary());
+			
+			result = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
 			disconn();
 		}
+		
 		return result;
 	}
-	
 	
 	
 

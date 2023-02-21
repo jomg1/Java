@@ -29,7 +29,7 @@ public class LoadingForm {
 				departments();
 				break;
 			case 2:
-				//사원 관련 프로그램 메뉴 출력
+				employees();
 				break;
 			case 3:
 				System.out.println("end of prog");

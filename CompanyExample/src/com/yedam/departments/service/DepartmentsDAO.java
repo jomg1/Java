@@ -142,13 +142,7 @@ public class DepartmentsDAO extends DAO{
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 }
