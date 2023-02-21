@@ -55,4 +55,13 @@ public class GroupMem {
 		this.memAge = memAge;
 	}
 	
+	
+	@Override
+	public String toString() {
+		return "GroupMem [memId=" + memId + ", memName=" + memName + ", joinDate=" + joinDate + ", memEmail=" + memEmail
+				+ ", memAge=" + memAge + "]";
+	}
+	
+	
+	
 }
