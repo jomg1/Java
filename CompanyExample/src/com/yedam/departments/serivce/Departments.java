@@ -1,12 +1,12 @@
-package com.yedam.departments.service;
+package com.yedam.departments.serivce;
 
 public class Departments {
-	//VO 만들기 (db 데이터 받을 수 있는 곳)
 	
 	private int departmentId;
 	private String departmentName;
 	private int managerId;
 	private int locationId;
+	
 	public int getDepartmentId() {
 		return departmentId;
 	}
@@ -31,4 +31,6 @@ public class Departments {
 	public void setLocationId(int locationId) {
 		this.locationId = locationId;
 	}
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.yedam.departments.service;
+package com.yedam.departments.serivce;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,13 +22,13 @@ public class DepartmentsDAO extends DAO{
 	}
 	
 	//모든 부서 조회, 한 부서 조회, 부서 삭제, 수정, 등록
-	//명심!! 각 DAO에서 사용하는 쿼리는 반드시 SqlDeveloper에서 실행해보고 자바에 적용시킬 것.
+	//명심!! 각 DAO에서 사용하는 쿼리는 반드시 SqlDevolper에서 실행 해보고 자바에 적용 시킬 것.
 	
 	//모든 부서 조회
 	public List<Departments> getDepartmentsList(){
 		List<Departments> list = new ArrayList<>();
 		Departments depart = null;
-		try{
+		try {
 			conn();
 			String sql = "select * from dept";
 			stmt = conn.createStatement();
@@ -49,19 +49,17 @@ public class DepartmentsDAO extends DAO{
 		}finally {
 			disconn();
 		}
-		
 		return list;
 	}
 	
-	// 단건 조회
-	public Departments getDepartment(int departmentKey) {
+	//단건 조회
+	public Departments getDepartment(int deparmentKey) {
 		Departments depart = null;
-		
 		try {
 			conn();
 			String sql = "select * from dept where department_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,  departmentKey);
+			pstmt.setInt(1, deparmentKey);
 			
 			rs = pstmt.executeQuery();
 			
@@ -72,14 +70,14 @@ public class DepartmentsDAO extends DAO{
 				depart.setLocationId(rs.getInt("location_id"));
 				depart.setManagerId(rs.getInt("manager_id"));
 			}
-			
 		}catch(Exception e) {
 			e.printStackTrace();
+			
 		}finally {
 			disconn();
 		}
 		
-		return depart;
+		return depart;		
 	}
 	
 	//부서 삭제, 수정, 등록
@@ -88,11 +86,12 @@ public class DepartmentsDAO extends DAO{
 		int result = 0;
 		try {
 			conn();
-			String sql = "DELETE FROM dept WHERE department_id =?";
+			String sql = "DELETE FROM dept WHERE department_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,  d.getDepartmentId());
+			pstmt.setInt(1, d.getDepartmentId());
 			
 			result = pstmt.executeUpdate();
+					
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -106,12 +105,12 @@ public class DepartmentsDAO extends DAO{
 		int result = 0;
 		try {
 			conn();
-			String sql = "update set manager_id = ? where department_id =?";
+			String sql = "update dept set manager_id = ? where department_id =?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1,  dept.getManagerId());
-			pstmt.setInt(2,  dept.getDepartmentId());
+			pstmt.setInt(1, dept.getManagerId());
+			pstmt.setInt(2, dept.getDepartmentId());
 			
-			result = pstmt.executeUpdate();//실행 결과를 확실히 알기 위해서 result에 결과값을 넣어준다.
+			result = pstmt.executeUpdate();
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -120,19 +119,20 @@ public class DepartmentsDAO extends DAO{
 		}
 		return result;
 	}
-	
 	//등록
 	public int insertDept(Departments dept) {
 		int result = 0;
 		try {
 			conn();
-			String sql = "insert into dept values(?,?,?,?)";
+			String sql = "insert into dept values (?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, dept.getDepartmentId());
 			pstmt.setString(2, dept.getDepartmentName());
 			pstmt.setInt(3, dept.getManagerId());
 			pstmt.setInt(4, dept.getLocationId());
 			
+			result = pstmt.executeUpdate();
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -142,7 +142,15 @@ public class DepartmentsDAO extends DAO{
 	}
 	
 	
-
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

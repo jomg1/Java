@@ -7,44 +7,43 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 
 public class DAO {
-	//DAO -> DATA ACCESS OBJECT
-	//JAVA <-> DB 연결 할 때 쓰는 객체
-	//JDBC를 통해서 JAVA <-> DB가 연결된다.
-	//해당 클래스에는 JDBC에 대한 내용이 들어옴
-	//OJDBC를 사용
-	
-	//java -> DB 연결할 때 쓰는 객체
+	// DAO -> DATA ACCESS OBJECT
+	// JAVA <-> DB 연결 할 때 쓰는 객체
+	// JDBC를 통해서 JAVA <-> DB가 연결 한다.
+	// OJDBC를 사용
+
+	// java -> DB 연결할때 쓰는 객체(Connection)
 	protected Connection conn = null;
-	
-	//Query문(SQL, 질의)을 가지고 해당 Query문 실행하는 객체 (1)
+
+	// Query문(SQL,질의)을 가지고 해당 Query문 실행하는 객체
 	protected PreparedStatement pstmt = null;
-	
-	//Query문(SQL, 질의)을 가지고 해당 Query문 실행하는 객체 (2) 둘 중 하나
+
+	// Query문(SQL,질의)을 가지고 해당 Query문 실행하는 객체
 	protected Statement stmt = null;
-	
-	//SELECT(조회) 결과값을 반환받는 객체
+
+	// SELECT(조회) 결과 값을 반환 받는 객체
 	protected ResultSet rs = null;
-	
+
 	//hr 계정 접속
 	
-	String driver ="oracle.jdbc.driver.OracleDriver";
+	String driver = "oracle.jdbc.driver.OracleDriver"; 
 	String url = "jdbc:oracle:thin:@localhost:1521:xe";
 	String id = "hr";
 	String pw = "hr";
 	
 	//DB 연결 메소드
 	public void conn() {
-		//1. 드라이버 로딩
 		try {
+			//1. 드라이버 로딩
 			Class.forName(driver);
 			//2. DB 연결
-			conn = DriverManager.getConnection(url, id, pw);
+			conn = DriverManager.getConnection(url,id,pw);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 	
-	//연결 해제
+	//DB 연결 해제
 	public void disconn() {
 		try {
 			if(rs != null) {
@@ -58,9 +57,24 @@ public class DAO {
 			}
 			if(conn != null) {
 				conn.close();
-			}
+			}	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
