@@ -24,7 +24,7 @@ public class GroupMemService {
 	
 //	1. 새 회원 등록
 	public void getMember() {
-		GroupMem gMem = 
+		
 	}
 	
 //	2. 모든 회원 조회 -> 가입 날짜순서대로 조회
