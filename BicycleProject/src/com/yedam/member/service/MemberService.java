@@ -54,4 +54,36 @@ public class MemberService {
 		}
 	}
 	
+	//정보수정 4-1) 비밀번호 수정 | 4-2) 이메일 수정 | 4-3) 주소 수정
+	public void modifyMember() {
+		Member member = new Member();
+		System.out.println("비밀번호>");
+		member.setMemberPw(sc.nextLine());
+		System.out.println("회원ID>");
+		member.setMemberId(sc.nextLine());
+		
+		int result = MemberDAO.getInstance().modifyMember(member);
+		
+		if(result > 0) {
+			System.out.println("비밀번호 수정 완료");
+		}else {
+			System.out.println("비밀번호 수정 실패");
+		}
+		
+	}
+	
+	//회원 탈퇴
+	public void deleteMember() {
+		System.out.println("회원ID>");
+		int result = MemberDAO.getInstance().deleteMember(sc.nextLine());
+		
+		//자신의 ID를 넣었다.
+		//로그인 되어있는 상태에서 회원 탈퇴 -> 로그아웃.
+		if(result > 0) {
+			MemberService.memberInfo = null;//로그아웃
+			System.out.println("탈퇴가 완료되었습니다. 이용해주셔서 감사합니다.");
+		} else {
+			System.out.println("탈퇴에 실패했습니다.");
+		}
+	}
 }

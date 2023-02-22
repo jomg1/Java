@@ -67,13 +67,17 @@ public class ExeApp {
 			break;
 		case "5":
 			//본인 정보 수정
+			ms.modifyMember();
+			break;
 		case "6":
 			//로그아웃
 			System.out.println("로그아웃 되었습니다.");
 			run = false;
+			logoutMenu();
 			break;
 		case "7":
 			//회원 탈퇴
+			ms.deleteMember();
 			break;
 		}
 	}
