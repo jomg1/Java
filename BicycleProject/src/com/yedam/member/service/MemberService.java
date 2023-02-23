@@ -55,19 +55,56 @@ public class MemberService {
 	}
 	
 	//정보수정 4-1) 비밀번호 수정 | 4-2) 이메일 수정 | 4-3) 주소 수정
-	public void modifyMember() {
+	//비밀번호 수정
+	public void modifyPw() {
 		Member member = new Member();
-		System.out.println("비밀번호>");
+		System.out.println("비밀번호 변경>");
 		member.setMemberPw(sc.nextLine());
 		System.out.println("회원ID>");
 		member.setMemberId(sc.nextLine());
 		
-		int result = MemberDAO.getInstance().modifyMember(member);
+		int result = MemberDAO.getInstance().modifyPw(member);
 		
 		if(result > 0) {
 			System.out.println("비밀번호 수정 완료");
 		}else {
 			System.out.println("비밀번호 수정 실패");
+		}
+		
+	}
+	
+	//이메일 수정
+	public void modifyEmail() {
+		Member member = new Member();
+		System.out.println("EMAIL 변경>");
+		member.setMemberPw(sc.nextLine());
+		System.out.println("회원ID>");
+		member.setMemberId(sc.nextLine());
+		
+		int result = MemberDAO.getInstance().modifyEmail(member);
+		
+		if(result > 0) {
+			System.out.println("EMAIL 수정 완료");
+		}else {
+			System.out.println("EMAIL 수정 실패");
+		}
+		
+	}
+	
+	//주소 수정
+	public void modifyAddr() {
+		Member member = new Member();
+		System.out.println("주소 변경>");
+		member.setMemberAddr(sc.nextLine());
+		System.out.println("회원ID>");
+		member.setMemberId(sc.nextLine());
+		
+		int result = MemberDAO.getInstance().modifyAdd(member);
+		
+		if(result > 0) {
+			System.out.println("주소 수정 완료");
+		}else {
+			System.out.println("주소 수정 실패");
 		}
 		
 	}

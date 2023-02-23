@@ -1,8 +1,5 @@
 package com.yedam.member.service;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.yedam.common.DAO;
 
 public class MemberDAO extends DAO{
@@ -71,9 +68,39 @@ public class MemberDAO extends DAO{
 		return result;
 	}
 	
+	//회원 조회 - 단건 조회
+	public Member getMember() {
+		Member mem = null;
+		
+		try {
+			conn(); 
+			String sql = "SELECT *\r\n"
+					+ "FROM member\r\n"
+					+ "WHERE member_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, MemberService.memberInfo.getMemberId());
+			
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				mem = new Member();
+				mem.setMemberId(rs.getString("member_id"));
+				mem.setMemberPw(rs.getNString("member_pw"));
+				mem.setMemberAddr(rs.getString("member_addr"));
+				mem.setMemberGrade(rs.getString("member_grade"));
+			}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return mem;
+	}
+	
 	//회원 정보 수정 - 비밀번호, 이메일, 주소
-	//현재는 비밀번호
-	public int modifyMember(Member member) {
+	//비밀번호
+	public int modifyPw(Member member) {
 		int result = 0;
 		try {
 			conn();
@@ -82,6 +109,50 @@ public class MemberDAO extends DAO{
 					+ "WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1,  member.getMemberPw());
+			pstmt.setString(2, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//이메일
+	public int modifyEmail(Member member) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE member\r\n"
+					+ "SET member_email = ?\r\n"
+					+ "WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  member.getMemberEmail());
+			pstmt.setString(2, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//주소
+	public int modifyAdd(Member member) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "UPDATE member\r\n"
+					+ "SET member_address = ?\r\n"
+					+ "WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1,  member.getMemberAddr());
 			pstmt.setString(2, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
@@ -112,52 +183,6 @@ public class MemberDAO extends DAO{
 		return result;
 	}
 	
-	//회원 조회 - 전체 조회
-	public List<Member> getMemberList(){
-		List<Member> list = new ArrayList<>();
-		Member mem = null;
-		try {
-			conn();
-			String sql = "SELECT *\r\n"
-					+ "FROM member";
-			stmt = conn.createStatement();
-			rs = stmt.executeQuery(sql);
-			
-			while(rs.next()) {
-				mem = new Member();
-				mem.setMemberId(rs.getString("member_id"));
-				mem.setMemberPw(rs.getString("member_pw"));
-				mem.setMemberEmail(rs.getString("memeber_email"));
-				mem.setMemberAddr(rs.getNString("member_address"));
-				mem.setMemberGrade(rs.getString("member_grade"));
-				
-				list.add(mem);
-			}
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			disconn();
-		}
-		return list;
-	}
-	
-	//회원 조회 - 단건 조회
-	public Member getMember(int memberKey) {
-		Member mem = null;
-		try {
-			conn();
-			String sql = "SELECT *\r\n"
-					+ "FROM member\r\n"
-					+ "WHERE member_id = ?";
-			
-		}catch(Exception e) {
-			e.printStackTrace();
-		}finally {
-			disconn();
-		}
-		return mem;
-	}
 	
 	
 }
