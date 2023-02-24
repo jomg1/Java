@@ -123,4 +123,8 @@ public class MemberService {
 			System.out.println("탈퇴에 실패했습니다.");
 		}
 	}
+	
+	//자전거 조회
+	
+	
 }

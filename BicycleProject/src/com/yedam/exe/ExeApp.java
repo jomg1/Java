@@ -3,12 +3,15 @@ package com.yedam.exe;
 import java.util.Scanner;
 
 import com.yedam.admin.service.AdminService;
+import com.yedam.bicycle.service.BicycleService;
 import com.yedam.member.service.MemberService;
 
 public class ExeApp {
 	
 	MemberService ms = new MemberService();
 	AdminService as = new AdminService();
+	BicycleService bs = new BicycleService();
+	
 	Scanner sc = new Scanner(System.in);
 	
 	// run 메소드 안에 메뉴 선택 용도
@@ -54,11 +57,11 @@ public class ExeApp {
 		switch(menu) {
 		case "1":
 			//자전거 조회
-			
+			bs.bicycleList();
 			break;
 		case "2":
 			//자전거 대여
-			
+			bs.bicycleRent();
 			break;
 		case "3":
 			//연장 및 반납
