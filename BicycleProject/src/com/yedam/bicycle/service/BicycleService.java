@@ -6,11 +6,11 @@ import java.util.Scanner;
 import com.yedam.member.service.Member;
 import com.yedam.member.service.MemberDAO;
 import com.yedam.member.service.MemberRentInfo;
+import com.yedam.member.service.MemberService;
 
 
 
-public class BicycleService {
-	public static Member memberInfo = null;	
+public class BicycleService extends MemberService{
 	
 	Scanner sc = new Scanner(System.in);
 	
@@ -49,38 +49,37 @@ public class BicycleService {
 		System.out.println("자전거 번호>");
 		int num = Integer.parseInt(sc.nextLine());
 		System.out.println("이용 시간>");
-		String time = sc.nextLine();
-		System.out.println("금액은 "+(Integer.parseInt(time)*1000)+"입니다.");
+		int time = Integer.parseInt(sc.nextLine());
+		System.out.println("금액은 "+(time*1000)+"입니다.");
 		System.out.println("투입>");
 		int money = Integer.parseInt(sc.nextLine());
 		
 		MemberRentInfo mInfo = new MemberRentInfo();
-		int r = BicycleDAO.getInstance().mRent(mInfo);
-		if(r > 0) {
-			if(money == (Integer.parseInt(time)*1000)) {
-				System.out.println("님, 대여가 완료되었습니다.");
-				int result = BicycleDAO.getInstance().rent(num, memberInfo.getMemberId());
-				if(result == 0) {
-					System.out.println("에러발생");
-				}
-				// 멤버 인포에 대입
-				
+		if(money == (time*1000)) {
+			System.out.println(memberInfo.getMemberId()+"님, 대여가 완료되었습니다.");
+			int result = BicycleDAO.getInstance().rent(num, memberInfo.getMemberId());
+			if(result == 0) {
+				System.out.println("자전거 정보 업데이트 에러");
 			}
+			mInfo.setMemId(memberInfo.getMemberId());
+				mInfo.setBicycleId(num);
+				mInfo.setRentAmount(time*1000);
+				int total = BicycleDAO.getInstance().total(memberInfo.getMemberId());
+				mInfo.setTotalRentAmount(total + (time*1000));
+				int res = BicycleDAO.getInstance().mRent(mInfo);
+				if(res == 0) {
+					System.out.println("멤버정보 업데이트 에러");
+				}
+				
+			
 		}
-				
-		Bicycle bicycle = new Bicycle();
-		bicycle.setbId(num);
-		bicycle.getbRental();
-				
-		
+
 	}
 	
 	//연장 및 반납
 	public void returnBicycle(Bicycle bicycle) {
 		System.out.println("1. 반납 2. 시간 연장 >");
-		String answer = sc.nextLine();
-		if(answer.equals("1")) {
-			System.out.println("반납되었습니다.");
+		
 			//반납();
 		}
 	}

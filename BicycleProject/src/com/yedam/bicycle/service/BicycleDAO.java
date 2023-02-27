@@ -107,17 +107,40 @@ public class BicycleDAO extends DAO{
 		try {
 			conn();
 			String sql = "UPDATE mem_rent_info\r\n"
-					+ "SET bicycle_id = ?, rent_date = sysdate, rent_amount = ?, total_amount = NVL(rent_amount,0) + NVL(total_amount,0)\r\n"
+					+ "SET bicycle_id = ?, rent_date = sysdate, rent_amount = ?, total_amount = ?\r\n"
 					+ "WHERE member_id = ?";
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(4, mInfo.getMemId());
 			pstmt.setInt(1, mInfo.getBicycleId());
-			pstmt.setDate(2, mInfo.getRentDate());
-			pstmt.setInt(3, mInfo.getRentAmount());
-			pstmt.setInt(4, mInfo.getTotalRentAmount());
+			pstmt.setInt(2, mInfo.getRentAmount());
+			pstmt.setInt(3, mInfo.getTotalRentAmount());
 			
 			result = pstmt.executeUpdate();
 			
 			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//토탈렌트 불러오기
+	public int total(String id) {
+		int result = 0;
+		try {
+			String sql = "SELECT total_amount\r\n"
+					+ "FROM mem_rent_info\r\n"
+					+ "WHERE member_id = ?";
+			
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				result = rs.getInt("total_amount");
+			}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
