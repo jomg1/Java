@@ -62,13 +62,13 @@ public class BicycleService extends MemberService{
 				System.out.println("자전거 정보 업데이트 에러");
 			}
 			mInfo.setMemId(memberInfo.getMemberId());
-				mInfo.setBicycleId(num);
-				mInfo.setRentAmount(time*1000);
-				int total = BicycleDAO.getInstance().total(memberInfo.getMemberId());
-				mInfo.setTotalRentAmount(total + (time*1000));
-				int res = BicycleDAO.getInstance().mRent(mInfo);
-				if(res == 0) {
-					System.out.println("멤버정보 업데이트 에러");
+			mInfo.setBicycleId(num);
+			mInfo.setRentAmount(time*1000);
+			int total = BicycleDAO.getInstance().total(memberInfo.getMemberId());
+			mInfo.setTotalRentAmount(total + (time*1000));
+			int res = BicycleDAO.getInstance().mRent(mInfo);
+			if(res == 0) {
+			System.out.println("멤버정보 업데이트 에러");
 				}
 				
 			
@@ -78,10 +78,19 @@ public class BicycleService extends MemberService{
 	
 	//연장 및 반납
 	public void returnBicycle(Bicycle bicycle) {
-		System.out.println("1. 반납 2. 시간 연장 >");
+		System.out.println("반납 자전거 ID>");
+		int bId = Integer.parseInt(sc.nextLine());
 		
-			//반납();
+		int result = BicycleDAO.getInstance().returnB(bId);
+		MemberRentInfo mInfo = new MemberRentInfo();
+		if (result == 0) {
+			System.out.println("자전거 정보 업데이트 에러");
 		}
-	}
+		mInfo.setMemId(memberInfo.getMemberId());
+		mInfo.setBicycleId(bId);
+		
+		}
+	
+
 	
 }

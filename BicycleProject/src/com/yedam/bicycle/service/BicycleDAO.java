@@ -151,7 +151,7 @@ public class BicycleDAO extends DAO{
 	
 	
 	//반납(자전거 정보)
-	public int returnB(Bicycle bicycle) {
+	public int returnB(int bId) {
 		int result = 0;
 		try {
 			conn();
@@ -161,9 +161,7 @@ public class BicycleDAO extends DAO{
 					+ "WHERE bicycle_id = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bicycle.getbId());
-			pstmt.setString(2, bicycle.getbRental());
-			pstmt.setDate(3, (Date) bicycle.getbRentalDate());
+			pstmt.setInt(1, bId);
 			
 			result = pstmt.executeUpdate();
 			
@@ -178,7 +176,6 @@ public class BicycleDAO extends DAO{
 	
 	//반납(회원) ---------------수정 요망
 	public int returnM(MemberRentInfo mInfo) {
-		Member member = null;
 		int result = 0;
 		try {
 			conn();
@@ -188,7 +185,7 @@ public class BicycleDAO extends DAO{
 					+ "WHERE member_id = ?";
 			
 			pstmt = conn.prepareStatement(sql);
-			//pstmt.setInt(1, );
+			result = pstmt.executeUpdate();
 			
 			
 			
@@ -226,7 +223,7 @@ public class BicycleDAO extends DAO{
 		int result = 0;
 		try {
 			conn();
-			String sql = "";
+			String sql = "UPDATE bicycle_info SET ";
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
