@@ -1,5 +1,6 @@
 package com.yedam.member.service;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class MemberService {
@@ -46,13 +47,17 @@ public class MemberService {
 		mem.setMemberAddr(sc.nextLine());
 		
 		int result = MemberDAO.getInstance().insertMem(mem);
-		
 		if(result>0) {
 			System.out.println("회원 가입이 완료되었습니다.");
+			int re = MemberDAO.getInstance().createMemInfo(mem);
+			if(re == 0) {
+				System.out.println("에러발생");
+			}
 		}else {
 			System.out.println("회원 가입에 실패했습니다.");
 		}
 	}
+	
 	
 	//정보수정 4-1) 비밀번호 수정 | 4-2) 이메일 수정 | 4-3) 주소 수정
 	//비밀번호 수정
@@ -124,7 +129,24 @@ public class MemberService {
 		}
 	}
 	
-	//자전거 조회
+	
+	//대여 정보 조회
+
+	public void getMemInfoList() {
+		List<MemberRentInfo> list = MemberDAO.getInstance().getMemInfoList();
+		System.out.println();
+		for(int i=0; i<list.size();i++) {
+			System.out.println("나의 ID : " + list.get(i).getMemId());
+			System.out.println("대여 날짜 : " + list.get(i).getRentDate());
+			System.out.println("반납 날짜 : " + list.get(i).getReturnDate());
+			System.out.println("이용 시간 : " + list.get(i).getRentTime());
+			System.out.println("이용 금액 : " + list.get(i).getRentAmount());
+			System.out.println("총 이용 시간 : " + list.get(i).getTotalRentTime());
+			System.out.println("총 이용 금액 : " + list.get(i).getTotalRentAmount());
+			System.out.println();
+		}
+	}
+	
 	
 	
 }

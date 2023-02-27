@@ -1,5 +1,7 @@
 package com.yedam.member.service;
 
+import java.sql.Date;
+
 public class Member {
 	
 	//필드
@@ -8,8 +10,11 @@ public class Member {
 	private String memberEmail;
 	private String memberAddr;
 	private String memberGrade;
+
 	
 	//메소드
+	
+
 	public String getMemberId() {
 		return memberId;
 	}

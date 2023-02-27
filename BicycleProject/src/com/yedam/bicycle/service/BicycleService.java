@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.yedam.member.service.Member;
+import com.yedam.member.service.MemberDAO;
+import com.yedam.member.service.MemberRentInfo;
 
 
 
@@ -46,18 +48,30 @@ public class BicycleService {
 		avaList();
 		System.out.println("자전거 번호>");
 		int num = Integer.parseInt(sc.nextLine());
+		System.out.println("이용 시간>");
+		String time = sc.nextLine();
+		System.out.println("금액은 "+(Integer.parseInt(time)*1000)+"입니다.");
+		System.out.println("투입>");
+		int money = Integer.parseInt(sc.nextLine());
 		
+		MemberRentInfo mInfo = new MemberRentInfo();
+		int r = BicycleDAO.getInstance().mRent(mInfo);
+		if(r > 0) {
+			if(money == (Integer.parseInt(time)*1000)) {
+				System.out.println("님, 대여가 완료되었습니다.");
+				int result = BicycleDAO.getInstance().rent(num, memberInfo.getMemberId());
+				if(result == 0) {
+					System.out.println("에러발생");
+				}
+				//
+				
+			}
+		}
+				
 		Bicycle bicycle = new Bicycle();
 		bicycle.setbId(num);
 		bicycle.getbRental();
-		
-		int result = BicycleDAO.getInstance().rent(num);
-		
-		if(result > 0) {
-			System.out.println("자전거가 대여되었습니다.");
-		}else {
-			System.out.println("자전거 대여에 실패했습니다. 자전거 ID를 확인해주세요.");
-		}
+				
 		
 	}
 	

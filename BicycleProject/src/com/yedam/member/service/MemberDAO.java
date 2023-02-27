@@ -1,5 +1,8 @@
 package com.yedam.member.service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.yedam.common.DAO;
 
 public class MemberDAO extends DAO{
@@ -14,6 +17,8 @@ public class MemberDAO extends DAO{
 	public static MemberDAO getInstance() {
 		return mDao;
 	}
+	
+	
 	
 	//1.로그인 기능
 	public Member login(String id) {
@@ -60,6 +65,25 @@ public class MemberDAO extends DAO{
 			
 			result = pstmt.executeUpdate();
 			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	//회원가입 - 멤버 인포 생성
+	public int createMemInfo(Member mem) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "INSERT INTO mem_rent_info(member_id)\r\n"
+					+ "VALUES(?)";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, mem.getMemberId());
+			
+			result = pstmt.executeUpdate();
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -182,6 +206,40 @@ public class MemberDAO extends DAO{
 		}
 		return result;
 	}
+	
+	//대여 정보 확인
+	public List<MemberRentInfo> getMemInfoList(){
+		List<MemberRentInfo> list = new ArrayList<>();
+		MemberRentInfo memInfo = null;
+		try {
+			conn();
+			String sql = "SELECT *\r\n"
+					+ "FROM mem_rent_info\r\n"
+					+ "WHERE member_id = ?";
+			stmt = conn.createStatement();
+			rs = stmt.executeQuery(sql);
+			
+			while(rs.next()) {
+				memInfo = new MemberRentInfo();
+				memInfo.setMemId(rs.getString("member_id"));
+				memInfo.setRentDate(rs.getDate("rent_date"));
+				memInfo.setReturnDate(rs.getDate("return_date"));
+				memInfo.setRentTime(rs.getDate("rent_time"));
+				memInfo.setRentAmount(rs.getInt("rent_amount"));
+				memInfo.setTotalRentTime(rs.getDate("total_rent_time"));
+				memInfo.setTotalRentAmount(rs.getInt("total_amount"));
+				
+				list.add(memInfo);
+			}
+			
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return list;
+	}
+	
 	
 	
 	

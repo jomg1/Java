@@ -48,9 +48,9 @@ public class ExeApp {
 	
 	private void memberMenu() {
 		//내정보 조회, 탈퇴, 수정
-		System.out.println("============================================================================================");
-		System.out.println("1.자전거 조회 | 2.자전거 대여 | 3.연장 및 반납 | 4.나의 대여 정보 확인 | 5.정보 수정 | 6.로그아웃 | 7.회원 탈퇴");
-		System.out.println("============================================================================================");
+		System.out.println("==================================================================================================");
+		System.out.println("1.자전거 조회 | 2.자전거 대여 및 예약 | 3.연장 및 반납 | 4.나의 대여 정보 확인 | 5.정보 수정 | 6.로그아웃 | 7.회원 탈퇴");
+		System.out.println("==================================================================================================");
 		System.out.println("입력>"); 
 		menu = sc.nextLine();
 		
@@ -60,15 +60,17 @@ public class ExeApp {
 			bs.bicycleList();
 			break;
 		case "2":
-			//자전거 대여
+			//자전거 대여 및 예약
 			bs.bicycleRent();
+			
 			break;
 		case "3":
 			//연장 및 반납
-			
+			rnetMenu();
 			break;
 		case "4":
 			//대여 정보 확인
+			ms.getMemInfoList();
 			break;
 		case "5":
 			//본인 정보 수정
@@ -99,15 +101,15 @@ public class ExeApp {
 		switch(menu) {
 		case "1":
 			//대여 현황 조회 - 대여인 id, 이름, 자전거 id, 자전거 관리 위치
-			
+			as.rentState();
 			break;
 		case "2":
 			//자전거 조회 - 대여현황+자전거 상태(점검-양호,수리요망,수리)
-			
+			as.getBicycle();
 			break;
 		case "3":
 			//자전거 관리 메뉴 - 자전거 등록, 자전거 삭제, 자전거 정보 수정
-			
+			bicycleManage();
 			
 			break;
 		case "4":
@@ -234,6 +236,53 @@ public class ExeApp {
 			break;
 			
 		}
+	}
+	
+	private void rnetMenu() {
+		System.out.println("자전거 대여 및 예약 메뉴입니다.");
+		System.out.println("============================");
+		System.out.println("1. 대여 | 2. 예약 | 3. 이전 메뉴");
+		System.out.println("============================");
+		System.out.println("입력>");
+		
+		menu = sc.nextLine();
+		
+		switch(menu) {
+		case "1":
+			//대여
+			break;
+		case "2":
+			//예약
+			break;
+		case "3":
+			//이전 메뉴
+			memberMenu();
+			break;
+		}
+	}
+	
+	public void bicycleManage() {
+		System.out.println("자전거 관리 메뉴입니다.");
+		System.out.println("======================================");
+		System.out.println("1. 자전거 등록 | 2. 자전거 삭제 | 3. 이전 메뉴");
+		System.out.println("======================================");
+		System.out.println("입력>");
+		
+		menu = sc.nextLine();
+		
+		switch(menu) {
+		case "1":
+			//자전거 등록
+			as.insertBicycle();
+			break;
+		case "2":
+			//자전거 삭제
+			as.DeleteBicycle();
+		case "3":
+			//이전 메뉴
+			adminMenu();
+		}
+		bicycleManage();
 	}
 	
 	

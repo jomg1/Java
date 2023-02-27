@@ -6,6 +6,8 @@ import java.util.List;
 
 import com.yedam.common.DAO;
 import com.yedam.member.service.Member;
+import com.yedam.member.service.MemberRentInfo;
+import com.yedam.member.service.MemberService;
 
 
 public class BicycleDAO extends DAO{
@@ -79,14 +81,17 @@ public class BicycleDAO extends DAO{
 	}
 	
 	//대여 - 자전거 정보 업데이트
-	public int rent(int bicycleID) {
+	public int rent(int bicycleID, String memId) {
 		
 		int result = 0;
 		try {
 			conn();
-			String sql = "update bicycle_info set rental = 'O' where bicycle_id = ?";
+			String sql = "UPDATE bicycle_info\r\n"
+					+ "set rental = 'O', rent_time = sysdate, member_id = ? \r\n"
+					+ "WHERE bicycle_id = ?";
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, bicycleID);
+			pstmt.setString(1, memId);
+			pstmt.setInt(2, bicycleID);
 			result = pstmt.executeUpdate();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -96,11 +101,22 @@ public class BicycleDAO extends DAO{
 		return result;
 	}
 	
-	public int mRent(int bicycleId) {
+	//대여 - 멤버 대여 정보 업데이트
+	public int mRent(MemberRentInfo mInfo) {
 		int result = 0;
 		try {
 			conn();
-			String sql = "update bicycle_info set rental = 'O' where bicycle_id = ?";
+			String sql = "UPDATE mem_rent_info\r\n"
+					+ "SET bicycle_id = ?, rent_date = sysdate, rent_amount = ?, total_amount = NVL(rent_amount,0) + NVL(total_amount,0)\r\n"
+					+ "WHERE member_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, mInfo.getBicycleId());
+			pstmt.setDate(2, mInfo.getRentDate());
+			pstmt.setInt(3, mInfo.getRentAmount());
+			pstmt.setInt(4, mInfo.getTotalRentAmount());
+			
+			result = pstmt.executeUpdate();
+			
 			
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -137,15 +153,20 @@ public class BicycleDAO extends DAO{
 		return result;
 	}
 	
-	//반납(회원)
-	public int returnM(Bicycle bicyle) {
+	//반납(회원) ---------------수정 요망
+	public int returnM(MemberRentInfo mInfo) {
 		Member member = null;
 		int result = 0;
 		try {
 			conn();
-			String sql = "";
+			String sql = "UPDATE mem_rent_info\r\n"
+					+ "SET return_date = sysdate , rent_time = rent_date -  return_date,\r\n"
+					+ "total_rent_time = total_rent_time + rent_time\r\n"
+					+ "WHERE member_id = ?";
 			
 			pstmt = conn.prepareStatement(sql);
+			//pstmt.setInt(1, );
+			
 			
 			
 		}catch(Exception e) {
@@ -161,7 +182,13 @@ public class BicycleDAO extends DAO{
 		int result = 0;
 		try {
 			conn();
-			String sql = "";
+			String sql = "UPDATE bicycle_info\r\n"
+					+ "SET return_time = TO_DATE(?,'yy-mm-dd HH24:mi')\r\n"
+					+ "WHERE bicycle_id = ?";
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, bicycle.getbId());
+			pstmt.setDate(2, null);
+			
 		}catch(Exception e) {
 			e.printStackTrace();
 		}finally {
@@ -171,5 +198,20 @@ public class BicycleDAO extends DAO{
 		
 	}
 	
-	//나의 대여정보 확인
+	//예약
+	public int reservation(Bicycle bicycle) {
+		int result = 0;
+		try {
+			conn();
+			String sql = "";
+		}catch(Exception e) {
+			e.printStackTrace();
+		}finally {
+			disconn();
+		}
+		return result;
+	}
+	
+	
+	
 }
