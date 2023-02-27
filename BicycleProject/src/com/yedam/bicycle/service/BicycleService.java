@@ -63,7 +63,7 @@ public class BicycleService {
 				if(result == 0) {
 					System.out.println("에러발생");
 				}
-				//
+				// 멤버 인포에 대입
 				
 			}
 		}
